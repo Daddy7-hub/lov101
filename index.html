@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>101 причина, почему я тебя люблю</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ===== ЛЕТАЮЩИЕ СЕРДЕЧКИ ===== -->
+<div class="hearts"></div>
+
+<!-- 🎁 INTRO SCREEN -->
+<div class="intro-screen" id="introScreen">
+    <div class="intro-content">
+        <div class="intro-icon">💝</div>
+        <h2 id="introTitle"></h2>
+        <p id="introDescription"></p>
+        <p id="introFrom"></p>
+        <button id="startGift">Открыть подарок</button>
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="header-top">
+        <h1 id="title">101 причина, почему я тебя люблю</h1>
+        <button id="themeToggle" aria-label="Переключить тему">🌙</button>
+    </div>
+
+    <p class="subtitle">
+        Не спеши. Каждая карточка — маленький повод улыбнуться 💖
+    </p>
+
+    <div class="progress">
+        Ты открыл(а) <span id="openedCount">0</span> из 101 ✨
+    </div>
+</header>
+
+<!-- ===== CARDS GRID ===== -->
+<main class="grid" id="grid"></main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>Это подарок. Его приятно растянуть во времени 💫</p>
+</footer>
+
+<!-- ================= MODALS ================= -->
+
+<!-- 🔒 LIMIT MODAL -->
+<div class="modal-overlay" id="limitModal">
+    <div class="modal">
+        <div class="modal-icon">💘🏹</div>
+        <h2>На сегодня достаточно</h2>
+        <p id="limitText"></p>
+        <p id="timerText"></p>
+        <button id="closeLimitModal">Хорошо</button>
+    </div>
+</div>
+
+<!-- 🌅 NEW DAY MODAL -->
+<div class="modal-overlay" id="newDayModal">
+    <div class="modal">
+        <div class="modal-icon">🌅💖</div>
+        <h2>Новый день</h2>
+        <p id="newDayText"></p>
+        <button id="startDay">Начать</button>
+    </div>
+</div>
+
+<!-- 🎁 FINAL SCREEN -->
+<div class="final-screen" id="finalScreen">
+    <div class="final-content">
+        <div class="final-icon">💖</div>
+        <p id="finalText"></p>
+        <span id="fromName"></span>
+    </div>
+</div>
+
+<!-- ===== SCRIPT ===== -->
+<script src="script.js"></script>
+
+</body>
+<div class="bubble-graffiti g1">love</div>
+<div class="bubble-graffiti g2">xoxo</div>
+<div class="bubble-graffiti g3">kiss</div>
+<div class="bubble-graffiti g4">♡</div>
+<div class="bubble-graffiti g5">forever</div>
+
+

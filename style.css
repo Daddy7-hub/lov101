@@ -1,0 +1,525 @@
+:root {
+    --bg: #0e0e14;
+    --card: #1b1b26;
+    --accent: #ff6ec7;
+    --text: #ffffff;
+    --muted: #9a9ab0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(circle at top, #1a1a2e, var(--bg));
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* ===== ЛЕТАЮЩИЕ СЕРДЕЧКИ ===== */
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* ===== HEADER ===== */
+header {
+    text-align: center;
+    padding: 50px 20px 20px;
+}
+
+h1 {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-size: 15px;
+}
+
+.progress {
+    font-size: 14px;
+    color: var(--accent);
+}
+
+/* ===== GRID ===== */
+.grid {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 18px;
+}
+
+/* ===== CARDS ===== */
+.card {
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    padding-top: 140%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card-inner:hover {
+    transform: scale(1.05);
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.face {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* FRONT */
+.front {
+    background: linear-gradient(135deg, #ff6ec7, #7873f5);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* LOCKED */
+.locked .front {
+    background: #2a2a3a;
+    color: var(--muted);
+}
+
+/* BACK */
+.back {
+    background: var(--card);
+    transform: rotateY(180deg);
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 13px;
+    color: var(--muted);
+}
+/* ===== MODAL ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 20, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal {
+    background: linear-gradient(135deg, #ff6ec7, #7873f5);
+    border-radius: 20px;
+    padding: 30px 26px;
+    max-width: 320px;
+    text-align: center;
+    color: white;
+    animation: popIn 0.4s ease;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.85) translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.modal h2 {
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.modal p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.modal button {
+    background: white;
+    color: #ff6ec7;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 22px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+/* ===== FINAL SCREEN ===== */
+.final-screen {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #ff6ec7, #0e0e14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 2000;
+}
+
+.final-screen.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.final-content {
+    text-align: center;
+    color: white;
+    max-width: 420px;
+    padding: 40px 30px;
+    animation: finalFade 0.8s ease;
+}
+
+.final-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.final-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.final-content span {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+@keyframes finalFade {
+    from {
+        transform: translateY(20px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+/* ===== INTRO SCREEN ===== */
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #ff6ec7, #0e0e14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+.intro-screen.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.intro-content {
+    text-align: center;
+    color: white;
+    padding: 40px 30px;
+    max-width: 420px;
+    animation: introFade 0.8s ease;
+}
+
+.intro-icon {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.intro-content h2 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.intro-content p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 16px;
+}
+
+.intro-content button {
+    background: white;
+    color: #ff6ec7;
+    border: none;
+    border-radius: 22px;
+    padding: 12px 26px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+@keyframes introFade {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+/* ===== HEADER TOP ===== */
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+#themeToggle {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text);
+    opacity: 0.7;
+}
+
+#themeToggle:hover {
+    opacity: 1;
+}
+/* ===== LIGHT THEME ===== */
+body.light {
+    --bg: #f7f7fb;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #666;
+    background: #f7f7fb;
+}
+
+body.light .front {
+    background: linear-gradient(135deg, #ff9ad5, #a7a4ff);
+}
+
+body.light .locked .front {
+    background: #e0e0ee;
+}
+/* ===== DAY FADE ===== */
+body.fade-day {
+    animation: dayFade 1s ease;
+}
+
+@keyframes dayFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* ===== BUBBLE GRAFFITI ===== */
+.bubble-graffiti {
+    position: fixed;
+    font-family: "Comic Sans MS", "Arial Rounded MT Bold", cursive;
+    font-weight: 700;
+    color: #ff4fa3;
+    opacity: 0.35;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(255,79,163,0.4));
+    animation: floatSticker 8s ease-in-out infinite;
+}
+
+/* разные позиции и размеры */
+.g1 {
+    top: 12px;
+    left: 20px;
+    font-size: 42px;
+    transform: rotate(-8deg);
+}
+
+.g2 {
+    top: 80px;
+    right: 24px;
+    font-size: 34px;
+    transform: rotate(12deg);
+}
+
+.g3 {
+    bottom: 120px;
+    left: 16px;
+    font-size: 38px;
+    transform: rotate(-15deg);
+}
+
+.g4 {
+    bottom: 40px;
+    right: 30px;
+    font-size: 56px;
+    transform: rotate(8deg);
+}
+
+.g5 {
+    top: 45%;
+    right: -10px;
+    font-size: 32px;
+    transform: rotate(-90deg);
+}
+
+/* лёгкое "плавание" как наклейки */
+@keyframes floatSticker {
+    0%   { transform: translateY(0) rotate(var(--r, 0deg)); }
+    50%  { transform: translateY(-6px) rotate(var(--r, 0deg)); }
+    100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+}
+/* ===== SCROLL GRAFFITI LAYER ===== */
+.graffiti-layer {
+    position: absolute;
+    top: 180px; /* начинается под header */
+    left: 0;
+    width: 100%;
+    height: 3000px; /* хватит под 101 карточку */
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ОБЩИЙ СТИЛЬ */
+.graffiti {
+    position: absolute;
+    font-family: "Comic Sans MS", "Arial Rounded MT Bold", cursive;
+    font-weight: 700;
+    color: #ff2f92;
+    opacity: 0.35;
+    filter: drop-shadow(0 0 10px rgba(255,47,146,0.5));
+    user-select: none;
+    white-space: nowrap;
+}
+
+
+/* ===== CONFETTI ===== */
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #ff2f92;
+    pointer-events: none;
+    z-index: 4000;
+    animation: confettiFly 900ms ease-out forwards;
+    border-radius: 2px;
+}
+
+@keyframes confettiFly {
+    from {
+        transform: translate(0,0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translate(var(--x), var(--y)) scale(0.7);
+        opacity: 0;
+    }
+}
+/* ===== BUBBLE GRAFFITI ===== */
+.bubble-graffiti {
+    position: fixed;
+    font-family: "Comic Sans MS", "Arial Rounded MT Bold", cursive;
+    font-weight: 700;
+    color: #ff4fa3;
+    opacity: 0.35;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(255,79,163,0.4));
+    animation: floatSticker 8s ease-in-out infinite;
+}
+
+/* разные позиции и размеры */
+.g1 {
+    top: 12px;
+    left: 20px;
+    font-size: 42px;
+    transform: rotate(-8deg);
+}
+
+.g2 {
+    top: 80px;
+    right: 24px;
+    font-size: 34px;
+    transform: rotate(12deg);
+}
+
+.g3 {
+    bottom: 120px;
+    left: 16px;
+    font-size: 38px;
+    transform: rotate(-15deg);
+}
+
+.g4 {
+    bottom: 40px;
+    right: 30px;
+    font-size: 56px;
+    transform: rotate(8deg);
+}
+
+.g5 {
+    top: 45%;
+    right: -10px;
+    font-size: 32px;
+    transform: rotate(-90deg);
+}
+
+/* лёгкое "плавание" как наклейки */
+@keyframes floatSticker {
+    0%   { transform: translateY(0) rotate(var(--r, 0deg)); }
+    50%  { transform: translateY(-6px) rotate(var(--r, 0deg)); }
+    100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+}
